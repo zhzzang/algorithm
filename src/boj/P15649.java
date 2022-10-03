@@ -18,7 +18,7 @@ public class P15649 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[n];
+        visited = new boolean[n + 1];
         arr = new int[m];
 
         find(0);
@@ -26,8 +26,8 @@ public class P15649 {
         System.out.println(sb);
     }
 
-    private static void find(int count) {
-        if (count == m) {
+    private static void find(int depth) {
+        if (depth == m) {
             for (int number : arr) {
                 sb.append(number).append(" ");
             }
@@ -35,13 +35,12 @@ public class P15649 {
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            if(!visited[i]) {
-                visited[i] = true;
-                arr[count] = i + 1;
-                find(count + 1);
-                visited[i] = false;
-            }
+        for (int i = 1; i <= n; i++) {
+            if (visited[i]) continue;
+            visited[i] = true;
+            arr[depth] = i ;
+            find(depth + 1);
+            visited[i] = false;
         }
     }
 }
